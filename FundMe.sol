@@ -4,6 +4,7 @@ pragma solidity ^0.8.18;
 import {PriceConverter} from "./PriceConverter.sol";
 
 error NotOwner();
+error NotEnoughFunds();
 
 contract FundMe {
     //using immutable to reduce the gass
@@ -23,7 +24,10 @@ contract FundMe {
 
     function fund() public payable {
         // uint256 currentConversion = PriceConverter.getConversionRate(msg.value);
-        require(msg.value.getConversionRate() >= MINIMUM_USD,"didn't send enough of funds"); // 1 ETH 
+        // require(msg.value.getConversionRate() >= MINIMUM_USD,"didn't send enough of funds"); // 1 ETH 
+        if(msg.value.getConversionRate() < MINIMUM_USD) {
+            revert NotEnoughFunds();
+        }
         listOfFunds.push(msg.sender);
         addressToAmount[msg.sender] += msg.value;
     }
@@ -33,6 +37,7 @@ contract FundMe {
         {
             address funder = listOfFunds[fundIndex];
             addressToAmount[funder] = 0;
+        }
             listOfFunds = new address[](0);
 
             //transfer
@@ -42,10 +47,8 @@ contract FundMe {
             // require(status,"Send failed");
             //call
             //recommended
-            (bool statusCall,) = payable(msg.sender).call{value: address(this).balance}("");
+            (bool statusCall,) = payable(i_owner).call{value: address(this).balance}("");
             require(statusCall,"Call failed");
-
-        }
     }
 
     modifier onlyOwner() {
