@@ -12,6 +12,11 @@
 			},
 			{
 				"inputs": [],
+				"name": "CallFailed",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "NotEnoughFunds",
 				"type": "error"
 			},
@@ -135,11 +140,11 @@
 			]
 		},
 		"FundMe.sol": {
-			"keccak256": "0x2c15903689010d5c02bac985592e3e84b6f9f9bbca7a4dd810bcb140f73f7a8c",
+			"keccak256": "0x41ae1eba0aea57375c02ef031e9f7d5e258dab52208a1b353bbb1d411583cff2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b6eb7b9f6fe8c5dd5216af2d6bc4f16d1a4214463056adc7d5eac157b77cfb1c",
-				"dweb:/ipfs/QmbatLVpZPDbXjChS1QUdocGetjSAG28bKJVAcm4yoeSeB"
+				"bzz-raw://77a61e1ccfa84a706cc3906b2c3293c0bf42d4b7f433e0cb224012d9c50b9cd7",
+				"dweb:/ipfs/QmXDTBQWFB2MAJDgQXvcXiMm9d1BomDpW4SzCKMFFskwzE"
 			]
 		},
 		"PriceConverter.sol": {

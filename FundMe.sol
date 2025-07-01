@@ -5,6 +5,7 @@ import {PriceConverter} from "./PriceConverter.sol";
 
 error NotOwner();
 error NotEnoughFunds();
+error CallFailed();
 
 contract FundMe {
     //using immutable to reduce the gass
@@ -48,7 +49,9 @@ contract FundMe {
             //call
             //recommended
             (bool statusCall,) = payable(i_owner).call{value: address(this).balance}("");
-            require(statusCall,"Call failed");
+            if(!statusCall) {
+                revert CallFailed();
+            }
     }
 
     modifier onlyOwner() {
